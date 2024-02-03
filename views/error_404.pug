@@ -1,0 +1,54 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title 404 Not Found
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      header {
+        background-color: #333;
+        color: white;
+        padding: 1em;
+        text-align: center;
+      }
+
+      main {
+        max-width: 600px;
+        margin: 2em auto;
+        padding: 1em;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      img {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        margin-top: 1em;
+      }
+
+      footer {
+        margin-top: 2em;
+        text-align: center;
+        padding: 1em;
+        background-color: #333;
+        color: white;
+      }
+    link(rel="stylesheet", href="/styles/error404.css")
+  body
+    header
+      h1 404 Not Found
+    main
+      p Sorry, the page you are looking for might be in another castle.
+      img(src="/images/mario.png", alt="Mario 404")
+    footer
+      p © 2024 STUHOMES

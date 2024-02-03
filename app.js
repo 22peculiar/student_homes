@@ -1,10 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
+const bcrypt = require('bcrypt');  // Don't forget to include bcrypt
 const path = require('path');
+const students = [];
 
 const app = express();
 const port = process.env.PORT || 3000;
+
 
 // Creating a MySQL connection
 const connection = mysql.createConnection({
@@ -12,7 +15,7 @@ const connection = mysql.createConnection({
     user: 'thomas',
     password: '',
     database: 'shms',
-    port: 3306, // Check and adjust the port as needed
+    port: 3306,
 });
 
 connection.connect((err) => {
@@ -24,12 +27,11 @@ connection.connect((err) => {
 });
 
 // Set the 'views' directory and use Pug as the view engine
-app.set('views',path.join(__dirname,'views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-
-app.use(bodyParser.json()); 
-app.use(bodyParser.urlencoded({ extended: true})) 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) => {
@@ -52,9 +54,6 @@ app.get('/register', (req, res) => {
     res.render('register');
 });
 
-app.get('/dashboard', (req, res) => {
-    res.render('dashboard', { data: students });
-});
 
 
 app.post('/login', async (req, res) => {
@@ -77,14 +76,14 @@ app.post('/login', async (req, res) => {
   
           if (isPasswordMatch) {
             // Login successful
-            res.send('Login successful!');
+            res.redirect('dashboard');
           } else {
             // Invalid password
-            res.send('Invalid password');
+            res.render('login');
           }
         } else {
           // User not found
-          res.send('Invalid username');
+          res.render('register');
         }
       });
     } catch (error) {
@@ -93,7 +92,7 @@ app.post('/login', async (req, res) => {
     }
   });
   
-  app.post('/register', async (req, res) => {
+app.post('/register', async (req, res) => {
     const { username, password } = req.body;
   
     try {
@@ -109,13 +108,18 @@ app.post('/login', async (req, res) => {
           return;
         }
   
-        res.send('Registration successful!');
+        res.redirect('login');
       });
     } catch (error) {
       console.error(error);
-      res.status(500).send('Internal Server Error');
+      res.status(500).render('error_404');
     }
   });
+
+  app.get('/dashboard', (req, res) => {
+    res.render('dashboard', { data: students });
+});
+
 
 app.post('/dashboard', (req, res) => { 
 	const name = req.body.name 
@@ -138,10 +142,8 @@ app.post('/dashboard', (req, res) => {
 		hostelName: hostelName 
 	}) 
 
-	res.render('dashboard', { 
-		data: students 
-	}) 
-}) 
+	res.render('dashboard', { data: students });
+}) ;
 
 app.post('/information', (req, res) => { 
 	var requestedRollNo = req.body.rollNo; 
@@ -149,8 +151,8 @@ app.post('/information', (req, res) => {
 		if (student.rollNo == requestedRollNo) { 
 			res.json(student) 
 		} 
-	}) 
-}) 
+	});
+});
 
 app.post('/update', (req, res) => { 
 	var requestedRollNo = req.body.rollNo; 
@@ -162,8 +164,8 @@ app.post('/update', (req, res) => {
 	}) 
 	res.render('dashboard', { 
 		data: students 
-	}) 
-}) 
+	});
+});
 
 app.post('/delete', (req, res) => { 
 	var requestedRollNo = req.body.rollNo; 
@@ -176,8 +178,8 @@ app.post('/delete', (req, res) => {
 	}) 
 	res.render('dashboard', { 
 		data: students 
-	}) 
-}) 
+	});
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
