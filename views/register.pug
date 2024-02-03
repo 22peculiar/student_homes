@@ -1,0 +1,90 @@
+doctype html
+html(lang="en")
+
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Student Management System - Register
+
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      header {
+        background-color: #333;
+        color: white;
+        padding: 1em;
+        text-align: center;
+      }
+
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 1em;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5em;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.5em;
+        margin-bottom: 1em;
+      }
+
+      button {
+        background-color: #333;
+        color: white;
+        padding: 0.5em 1em;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Smooth background color transition on hover */
+      }
+
+      button:hover {
+        background-color: #555; /* Darker color on hover */
+      }
+
+      .login-link {
+        display: block;
+        text-align: center;
+        margin-top: 1em;
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s ease; /* Smooth color transition on hover */
+      }
+
+      .login-link:hover {
+        color: #555; /* Darker color on hover */
+      }
+
+  body
+
+    header
+      h2 Register
+
+    main
+      form(action="/register", method="post")
+        label(for="username") Username
+        input(type="text", id="username", name="username", required)
+
+        label(for="email") Email
+        input(type="email", id="email", name="email", required)
+
+        label(for="password") Password
+        input(type="password", id="password", name="password", required)
+
+        button(type="submit") Register
+
+        a.login-link(href="/login") Already have an account? Login here.
+

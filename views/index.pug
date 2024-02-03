@@ -1,68 +1,77 @@
 doctype html
-html
+html(lang="en")
 
   head
-    style
-      | table {
-      |   font-family: arial, sans-serif;
-      |   border-collapse: collapse;
-      |   width: 100%;
-      | }
-      | 
-      | td, th {
-      |   border: 1px solid #dddddd;
-      |   text-align: left;
-      |   padding: 8px;
-      | }
-      | 
-      | tr:nth-child(even) {
-      |   background-color: #dddddd;
-      | }
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Student Management System
+
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      header {
+        background-color: #333;
+        color: white;
+        padding: 1em;
+        text-align: center;
+      }
+
+      nav {
+        display: flex;
+        justify-content: flex-end; /* Align links to the right */
+        background-color: #555;
+        padding: 0.5em;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 1em;
+        transition: color 0.3s ease; /* Smooth color transition on hover */
+      }
+
+      nav a:hover {
+        color: #ffc107; /* Yellow color on hover */
+      }
+
+      main {
+        padding: 2em;
+      }
+
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 1em;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
 
   body
-    h1 All Students
 
-    table
-      tr
-        th Name
-        th Roll No.
-        th Room No.
-        th Hostel Name
-        th More Info.
-        th Update Room No.
-        th Delete
+    header
+      h1 Student Housing Management System
 
-      each element in data
-        tr
-          td #{element.name}
-          td #{element.rollNo}
-          td #{element.roomNo}
-          td #{element.hostelName}
-          td
-            form(action="/information" method="post")
-              input(type="number" style="display: none;" name="rollNo" value=element.rollNo)
-              button(type="submit") More Info.
+    nav
+      a(href="/") Home
+      a(href="/aboutus") About Us
+      a(href="/contactus") Contact Us
+      a(href="/login") Login
+      a(href="/register") Register
 
-          td
-            form(action="/update" method="post")
-              input(type="number" style="display: none;" name="rollNo" value=element.rollNo)
-              input(type="number" name="newroomno")
-              button(type="submit") Update
+    main
+      h2 Welcome to the Student Housing Management System
+      p Your one-stop solution for managing student housing allocations.
 
-          td
-            form(action="/delete" method="post")
-              input(type="number" style="display: none;" name="rollNo" value=element.rollNo)
-              button(type="submit") Delete
+      // Include additional content here
 
-    h1 Add Student
+      // Example: Quick access links
 
-    form(action="/" method="post")
-      input(type="text" placeholder="Name" name="name")
-      input(type="number" placeholder="Roll No." name="rollNo")
-      input(type="text" placeholder="DOB" name="dateOfBirth")
-      input(type="text" placeholder="City" name="city")
-      input(type="number" placeholder="Number" name="number")
-      input(type="number" placeholder="Father's Number" name="fatherNumber")
-      input(type="number" placeholder="Room No." name="roomNo")
-      input(type="text" placeholder="Hostel Name" name="hostelName")
-      button(type="submit") Add
+    footer
+      p &copy; 2024 stuhomes | Address: 123 DIT Institute of Tech, Dar | Phone: (123) 456-7890 | Email: info@stuhomes.com

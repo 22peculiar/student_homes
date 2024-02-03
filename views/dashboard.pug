@@ -1,0 +1,68 @@
+doctype html
+html
+
+  head
+    style
+      | table {
+      |   font-family: arial, sans-serif;
+      |   border-collapse: collapse;
+      |   width: 100%;
+      | }
+      | 
+      | td, th {
+      |   border: 1px solid #dddddd;
+      |   text-align: left;
+      |   padding: 8px;
+      | }
+      | 
+      | tr:nth-child(even) {
+      |   background-color: #dddddd;
+      | }
+
+  body
+    h1 All Students
+
+    table
+      tr
+        th Name
+        th Roll No.
+        th Room No.
+        th Hostel Name
+        th More Info.
+        th Update Room No.
+        th Delete
+
+      foreach 
+        tr
+          td #{name}
+          td #{rollNo}
+          td #{roomNo}
+          td #{hostelName}
+          td
+            form(action="/information" method="post")
+              input(type="number" style="display: none;" name="rollNo" value=rollNo)
+              button(type="submit") More Info.
+
+          td
+            form(action="/update" method="post")
+              input(type="number" style="display: none;" name="rollNo" value=rollNo)
+              input(type="number" name="newroomno")
+              button(type="submit") Update
+
+          td
+            form(action="/delete" method="post")
+              input(type="number" style="display: none;" name="rollNo" value=rollNo)
+              button(type="submit") Delete
+
+    h1 Add Student
+
+    form(action="/" method="post")
+      input(type="text" placeholder="Name" name="name")
+      input(type="number" placeholder="Roll No." name="rollNo")
+      input(type="text" placeholder="DOB" name="dateOfBirth")
+      input(type="text" placeholder="City" name="city")
+      input(type="number" placeholder="Number" name="number")
+      input(type="number" placeholder="Father's Number" name="fatherNumber")
+      input(type="number" placeholder="Room No." name="roomNo")
+      input(type="text" placeholder="Hostel Name" name="hostelName")
+      button(type="submit") Add
